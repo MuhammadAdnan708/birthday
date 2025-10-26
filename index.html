@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Fiza!</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vue.js -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=DM+Serif+Display&family=Pacifico&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #cbaacb 0%, #fed6e3 100%);
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .birthday-title {
+            font-family: 'DM Serif Display', serif;
+            letter-spacing: 1.5px;
+        }
+
+        .confetti,
+        .sparkle {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            opacity: 0.8;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 60px;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: float 17s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-80px) rotate(360deg);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.090);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .gift-box {
+            transition: all 0.5s cubic-bezier(.68, -0.55, .27, 1.55);
+            cursor: pointer;
+            box-shadow: 0 10px 50px -12px #eaadc5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gift-box:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        .gift-box:active {
+            transform: scale(0.94) rotate(3deg);
+        }
+
+        .gift-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.4) 50%, transparent 70%);
+            transform: translateX(-100%);
+        }
+
+        .gift-box:hover::before {
+            transform: translateX(100%);
+            transition: transform 0.8s ease;
+        }
+
+        .shake {
+            animation: shake 0.7s ease infinite;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20% {
+                transform: translateX(-8px);
+            }
+
+            50% {
+                transform: translateX(12px);
+            }
+
+            75% {
+                transform: translateX(-7px);
+            }
+        }
+
+        .sparkle {
+            background: radial-gradient(circle, #e9d8fd 40%, #fed6e3 60%);
+        }
+
+        .fade-in {
+            animation: fadeIn 1.15s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-19px);
+            }
+
+            60% {
+                transform: translateY(-13px);
+            }
+        }
+
+        .storybook-image {
+            border-radius: 18px;
+            border: 2px solid #ffb7b2;
+            box-shadow: 0 8px 32px #ffb7b2a0;
+            background: #fff4f6f0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .storybook-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px #ffb7b2cc;
+        }
+
+        .glow {
+            box-shadow: 0 0 30px 2px #ffb7b2, 0 0 8px #eaadc5 inset;
+        }
+
+        .page-transition {
+            animation: pageTransition 0.8s ease-out;
+        }
+
+        @keyframes pageTransition {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .magic-button {
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            box-shadow: 0 4px 15px 0 rgba(255, 107, 157, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .magic-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px 0 rgba(255, 107, 157, 0.6);
+        }
+
+        .magic-button:active {
+            transform: translateY(1px);
+        }
+
+        .ribbon {
+            position: absolute;
+            top: -10px;
+            width: 150px;
+            height: 40px;
+            background: #ff6b9d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .ribbon::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 10px;
+            height: 10px;
+            background: #c44569;
+            z-index: -1;
+        }
+
+        .ribbon::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: 0;
+            width: 10px;
+            height: 10px;
+            background: #c44569;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- Gift Box Page -->
+        <div v-if="!showMainPage"
+            class="min-h-screen flex flex-col items-center justify-center px-6 page-transition relative overflow-hidden">
+            <!-- Background Elements -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                <div class="absolute top-10 left-10 w-20 h-20 rounded-full bg-pink-200 opacity-30 floating"
+                    style="animation-delay: 0s;"></div>
+                <div class="absolute top-20 right-20 w-16 h-16 rounded-full bg-purple-200 opacity-40 floating"
+                    style="animation-delay: 1s;"></div>
+                <div class="absolute bottom-20 left-20 w-24 h-24 rounded-full bg-yellow-200 opacity-30 floating"
+                    style="animation-delay: 2s;"></div>
+                <div class="absolute bottom-10 right-10 w-14 h-14 rounded-full bg-blue-200 opacity-40 floating"
+                    style="animation-delay: 1.5s;"></div>
+            </div>
+
+            <div class="text-center mb-8 relative z-10">
+                <h1 class="text-5xl md:text-6xl birthday-title font-bold text-white mb-5 drop-shadow-lg pulse">
+                    Happy Birthday Fiza <span class="text-yellow-300">✨</span>
+                </h1>
+                <p class="text-2xl text-pink-100 opacity-95 font-semibold mb-2">Let your story begin...</p>
+                <p class="text-white opacity-85 italic mb-4">A magical birthday surprise is waiting for you!</p>
+            </div>
+            <div class="relative z-10">
+                <!-- Gift Box -->
+                <div class="gift-box w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-yellow-200 via-pink-200 to-purple-200 rounded-xl shadow-2xl flex flex-col items-center justify-center p-6 relative"
+                    :class="{'shake': isShaking}" @click="interactWithGift" @mouseover="startShaking"
+                    @mouseleave="stopShaking">
+                    <div class="ribbon">
+                        <span class="text-white font-bold ">Special Gift</span>
+                    </div>
+                    <!-- <div
+                        class="absolute top-0 left-0 w-full h-4 bg-gradient-to-r from-pink-400 to-purple-400 rounded-t-xl">
+                    </div> -->
+                    <div
+    class="absolute top-8 left-1/2 -translate-x-1/2 w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center border-4 border-yellow-200 shadow-lg animate-pulse">
+    <i class="fas fa-gift text-white text-2xl"></i>
+</div>
+
+                    <div class="mt-16 text-center">
+                        <p class="text-pink-800 text-xl font-bold mb-2">Open your birthday treasure!</p>
+                        <p class="text-gray-700 text-md font-medium">Click {{ interactionCount }} times to reveal magic!
+                        </p>
+                    </div>
+                    <div class="absolute bottom-5 left-0 w-full flex justify-between px-5">
+                        <div
+                            class="w-14 h-2 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full transform -rotate-45">
+                        </div>
+                        <div
+                            class="w-14 h-2 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full transform rotate-45">
+                        </div>
+                    </div>
+                </div>
+                <!-- Balloons -->
+                <div class="balloon" style="left: 4%; background-color: #cbaacb; animation-delay: .5s;"></div>
+                <div class="balloon" style="left: 30%; background-color: #ffb7b2; animation-delay: 2s;"></div>
+                <div class="balloon" style="left: 60%; background-color: #eaadc5; animation-delay: 3s;"></div>
+                <div class="balloon" style="left: 90%; background-color: #fed6e3; animation-delay: 3s;"></div>
+            </div>
+            <!-- Hints -->
+            <div v-if="interactionCount >= 3 && interactionCount < 8"
+                class="mt-8 bg-white bg-opacity-30 backdrop-blur-sm rounded-lg p-4 max-w-md text-center fade-in glow shadow-md">
+                <p class="text-pink-800 font-semibold">Keep going! Only {{ 8 - interactionCount }} more clicks till the
+                    magic unfolds! 🌟</p>
+            </div>
+            <div v-if="interactionCount >= 8"
+                class="mt-8 bg-white bg-opacity-40 backdrop-blur-sm rounded-lg p-4 max-w-md text-center fade-in bounce glow">
+                <p class="text-pink-900 font-bold text-lg">Just one more spark, and your story begins!</p>
+            </div>
+        </div>
+
+        <!-- Main Birthday Page -->
+        <div v-if="showMainPage" class="min-h-screen page-transition fade-in relative overflow-hidden"
+            style="background: linear-gradient(120deg,#fed6e3 0%,#cbaacb 100%)">
+            <!-- Background Elements -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                <div class="absolute top-10 left-10 w-20 h-20 rounded-full bg-pink-200 opacity-20 floating"
+                    style="animation-delay: 0s;"></div>
+                <div class="absolute top-20 right-20 w-16 h-16 rounded-full bg-purple-200 opacity-30 floating"
+                    style="animation-delay: 1s;"></div>
+                <div class="absolute bottom-20 left-20 w-24 h-24 rounded-full bg-yellow-200 opacity-20 floating"
+                    style="animation-delay: 2s;"></div>
+                <div class="absolute bottom-10 right-10 w-14 h-14 rounded-full bg-blue-200 opacity-30 floating"
+                    style="animation-delay: 1.5s;"></div>
+            </div>
+
+            <!-- Header -->
+            <header class="text-center pt-10 pb-6 px-4 relative z-10">
+                <h1 class="text-5xl md:text-6xl birthday-title font-bold text-white drop-shadow-lg mb-3 pulse">
+                    Happy 20th Birthday Fiza <span class="text-yellow-300">✨</span>
+                </h1>
+                <p class="text-2xl text-white opacity-95 font-semibold">Your fairytale just turned a new page!</p>
+            </header>
+            <!-- Main Content -->
+            <main
+                class="bg-white rounded-3xl shadow-2xl p-8 md:p-10 max-w-4xl mx-4 md:mx-auto mb-10 relative z-10 backdrop-blur-sm bg-opacity-95">
+                <!-- Birthday Person Info -->
+                <section class="text-center mb-10">
+                    <div class="w-36 h-36 mx-auto mb-4 storybook-image shadow-lg overflow-hidden">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrEuGRHEIoNaSbRBy4uONjpNQlIaCBsRUpjw&s"
+                            alt="Fiza" class="w-full h-full object-cover">
+                    </div>
+                    <h2 class="text-3xl font-bold text-pink-800 mb-2">Fiza (Jannat)</h2>
+                    <p class="text-xl text-pink-600">Twenty candles & endless dreams.</p>
+                    <div class="flex justify-center space-x-4 mt-3 flex-wrap">
+                        <span class="px-4 py-2 bg-pink-200 text-pink-800 rounded-full font-semibold mb-2">Storybook
+                            Soul</span>
+                        <span class="px-4 py-2 bg-pink-100 text-pink-900 rounded-full font-semibold mb-2">Magical
+                            Romantic</span>
+                        <span class="px-4 py-2 bg-yellow-100 text-yellow-900 rounded-full font-semibold mb-2">Leo
+                            Spirit</span>
+                    </div>
+                </section>
+
+                <!-- Birthday Message -->
+                <section
+                    class="mb-10 bg-gradient-to-r from-pink-400 via-fuchsia-400 to-pink-300 rounded-2xl p-6 text-white text-center shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4">A Brother's Birthday Message</h3>
+                    <p class="text-lg mb-2">Dear Fiza, 💞
+Happy 20th Birthday! Today, I want to say something from the heart… You may not be my sister by blood, but you are my sister by soul and sometimes that bond is even deeper. 🤍✨
+From laughing at silly things to sharing our quiet moments, you’ve become someone truly precious in my life. Watching you grow into a kind, strong, and beautiful person has been something I’m genuinely proud of. 🌸😊
+I pray that life brings you endless happiness, peace, and success. And when Allah writes your love story, may He bless you with someone who understands your worth, protects your smile, stands with you in every storm, and loves you gently and sincerely. 💍💗🌙
+You deserve a love as pure as your heart, and a future as bright as your dreams. ✨🌷
+Always remember brother by choice, not by chance. 🤝💗
+I’ll always be here for you, today, tomorrow, forever. 🌙💞
+Happy Birthday, Fiza. 🎂🎉💗</p>
+                     <p class="text-xl font-semibold mt-2">You deserve a love that is pure, patient, kind, and unwavering — just like your own heart. 🤍✨</p>
+                    <div class="mt-3 flex justify-center space-x-2 text-yellow-300 text-xl">
+                    <div class="mt-3 flex justify-center space-x-2 text-yellow-300 text-xl">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-heart text-pink-400"></i>
+                    </div>
+                </section>
+
+                <!-- Birthday Wishes -->
+                <section class="mb-10">
+                    <h3 class="text-2xl font-bold text-pink-900 mb-4 text-center">My Wishes For You</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div v-for="wish in wishes" :key="wish.id"
+                            class="bg-gradient-to-tr from-pink-50 via-pink-100 to-yellow-50 p-4 rounded-lg border-l-4 border-pink-400 shadow-md transition-all duration-300 hover:shadow-lg">
+                            <p class="text-gray-800 italic mb-0">{{ wish.text }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Memory Gallery -->
+                <section class="mb-10">
+                    <h3 class="text-2xl font-bold text-pink-900 mb-4 text-center">Memory Gallery</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div v-for="photo in photos" :key="photo"
+                            class="storybook-image shadow-md cursor-pointer transform transition-all duration-300">
+                            <img :src="photo" :alt="'Memory'" class="w-full h-44 object-cover">
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Footer -->
+            <footer class="text-center py-6 text-white opacity-85 font-semibold relative z-10">
+                <p>Made with <i class="fas fa-heart text-red-400"></i> by your brother Mr Adnan, wishing you a hero worthy of
+                    your story. </p>
+                <p class="italic text-sm mt-2">May your life partner be as remarkable as the hero in your favourite
+                    novel.</p>
+            </footer>
+        </div>
+    </div>
+    <script>
+        const { createApp, ref, onMounted } = Vue;
+        createApp({
+            setup() {
+                const showMainPage = ref(false);
+                const interactionCount = ref(0);
+                const isShaking = ref(false);
+
+                // Wishes from brother to sister
+                const wishes = ref([
+                    { id: 1, text: "May your days be filled with adventure, gentle surprises, and a companion as wonderful as your favorite hero." },
+                    { id: 2, text: "May you find a kindred spirit who treasures your heart and fills your life with beautiful chapters." },
+                    { id: 3, text: "Wishing you romance, laughter, and someone who embodies the magic of fiction in real life." },
+                    { id: 4, text: "Your story deserves a legendary partner—may you meet someone as remarkable as your dreams." },
+                    { id: 5, text: "As your brother, I wish you a love story that's even better than the ones in your favorite books." },
+                    { id: 6, text: "May your future husband be a true gentleman who respects, loves, and supports you in every way." }
+                ]);
+
+                // Memory gallery filled with whimsical, dreamy images
+                const photos = ref([
+                    "./jnt.jpg",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEEBUWLH36ZuOZ23SHfZvAxcGfFC62tQQINA&s",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0rEEBEV8K4QJUHiIZ8f4bs7kntwznqviD8sbofBtDz-MyISbAky-EBdAP5lJ2cRtsxf4&usqp=CAU",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlweHvE_cmkHrWKwTc3hs7r83o46DjToXfvA&s",
+                    "https://photosking.net/wp-content/uploads/beautiful-girls-dp_128.webp",
+                    "https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=600&q=80"
+                ]);
+                const interactWithGift = () => {
+                    interactionCount.value++;
+                    createConfetti();
+                    if (interactionCount.value >= 9) {
+                        showMainPage.value = true;
+                        createBalloons();
+                        createSparkles();
+                    }
+                };
+                const startShaking = () => {
+                    if (interactionCount.value < 9) isShaking.value = true;
+                };
+                const stopShaking = () => { isShaking.value = false; };
+
+                const createConfetti = () => {
+                    const colors = ['#fed6e3', '#eaadc5', '#ffb7b2', '#cbaacb'];
+                    for (let i = 0; i < 36; i++) {
+                        setTimeout(() => {
+                            const confetti = document.createElement('div');
+                            confetti.className = 'confetti';
+                            confetti.style.left = Math.random() * 100 + 'vw';
+                            confetti.style.top = Math.random() * 30 + 'vh';
+                            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                            confetti.style.borderRadius = Math.random() > 0.5 ? '12px' : '50%';
+                            confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                            document.body.appendChild(confetti);
+                            setTimeout(() => {
+                                if (confetti.parentNode) confetti.parentNode.removeChild(confetti);
+                            }, 2200);
+                        }, i * 19);
+                    }
+                };
+                const createSparkles = () => {
+                    for (let i = 0; i < 18; i++) {
+                        setTimeout(() => {
+                            const sparkle = document.createElement('div');
+                            sparkle.className = 'sparkle';
+                            sparkle.style.left = Math.random() * 100 + 'vw';
+                            sparkle.style.top = (60 + Math.random() * 20) + 'vh';
+                            sparkle.style.width = '16px';
+                            sparkle.style.height = '16px';
+                            sparkle.style.opacity = 0.75 + Math.random() * 0.2;
+                            document.body.appendChild(sparkle);
+                            setTimeout(() => {
+                                if (sparkle.parentNode) sparkle.parentNode.removeChild(sparkle);
+                            }, 1800);
+                        }, i * 60);
+                    }
+                };
+                const createBalloons = () => {
+                    const colors = ['#fed6e3', '#eaadc5', '#ffb7b2', '#cbaacb'];
+                    for (let i = 0; i < 20; i++) {
+                        const balloon = document.createElement('div');
+                        balloon.className = 'balloon';
+                        balloon.style.left = Math.random() * 100 + 'vw';
+                        balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        balloon.style.animationDelay = Math.random() * 14 + 's';
+                        document.body.appendChild(balloon);
+                    }
+                };
+                onMounted(() => {
+                    createBalloons();
+                    createSparkles();
+                });
+
+                return {
+                    showMainPage,
+                    interactionCount,
+                    isShaking,
+                    wishes,
+                    photos,
+                    interactWithGift,
+                    startShaking,
+                    stopShaking
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
